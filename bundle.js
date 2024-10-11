@@ -7,9 +7,11 @@ let userScore = 0;
 let computerScore = 0;
 let userScoreDisplay = document.getElementById("userScore");
 let computerScoreDisplay = document.getElementById("computerScore");
+let Btn = document.getElementById("play-again");
+Btn.style.display = "none";
 
 function disableButtons(){
-    let buttons = document.querySelectorAll("button");
+    let buttons = document.querySelectorAll("#rock, #paper, #scissors");
     buttons.forEach(function(button){
         button.disabled = true;
     });
@@ -17,7 +19,7 @@ function disableButtons(){
 
 function computer(){
     let output = Math.random();
-    let = choice = "";
+    let choice = "";
     if(output >= 0 && output<1/3){
         choice = "rock";
     }else if(output >= 1/3 && output < 2/3){
@@ -46,12 +48,33 @@ function play(userMove){
     } else if (computerScore === 10){
         return annouceWinner("Computer")
     }
+
     function annouceWinner(winner){
         let gameStatus = document.getElementById("gameStatus");
+        let result = document.querySelector("p");
+        let info = document.querySelector("h2")
         gameStatus.textContent = `Game over, winner is: ${winner}`
+        result.style.display = "none";
+        info.style.display = "none";
         disableButtons();
+        Btn.style.display = "block"; 
     }
     return computerMove;
+}
+
+function playAgain() {
+    userScore = 0; 
+    computerScore = 0; 
+    userScoreDisplay.textContent = "User Score: 0"; 
+    computerScoreDisplay.textContent = "PC Score: 0";
+    result.style.display = "block"; 
+    result.textContent = "";
+    document.getElementById("gameStatus").textContent = ""; 
+    let buttons = document.querySelectorAll("button:not(#play-again)"); 
+    buttons.forEach(function(button) {
+        button.disabled = false; 
+    });
+    Btn.style.display = "none"; 
 }
 
 rock.addEventListener("click", function(){
@@ -62,5 +85,8 @@ paper.addEventListener("click", function(){
 })
 scissors.addEventListener("click", function(){
     play("scissors");
+})
+Btn.addEventListener("click", function(){
+    playAgain();
 })
 },{}]},{},[1]);
